@@ -33,17 +33,17 @@ function Game()
             let cs = computerSelection.toLowerCase();
 
             if (ps === cs) {
-                console.log('Draw!');
+                alert('Draw!');
             } else if (ps === 'rock' && cs === 'paper' ||
                 ps === 'paper' && cs === 'scissors' ||
                 ps === 'scissors' && cs === 'rock') {
                 csTotal++;
-                console.log('Player looses!');
+                alert('Player looses!');
             } else if (ps === 'rock' && cs === 'scissors' ||
                 ps === 'paper' && cs === 'rock' ||
                 ps === 'scissors' && cs === 'paper') {
                 psTotal++;
-                console.log('Player wins!');
+                alert('Player wins!');
             } else {
                 return 'Something went wrong! Please refresh the website';
             }
@@ -51,15 +51,15 @@ function Game()
 
 
         if (psTotal > csTotal) {
-            return console.log('Player wins!\n' +
+            return alert('Player wins!\n' +
                 'Player: ' + psTotal + '\n' +
                 'PC: ' + csTotal);
         } else if (psTotal < csTotal) {
-            return console.log('Computer wins!\n' +
+            return alert('Computer wins!\n' +
                 'PC: ' + csTotal + '\n' +
                 'Player: ' + psTotal);
         } else if (psTotal === csTotal) {
-            return console.log("it's a Draw");
+            return alert("it's a Draw");
         }
 
     }
