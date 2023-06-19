@@ -1,0 +1,61 @@
+html, body {
+    height: 100vh;
+}
+
+body {
+    background-image: url("assets/background.jpg"), url("https://images5.alphacoders.com/587/587597.jpg") ;
+    background-size:  cover ;
+    background-repeat: no-repeat;
+    background-position: center;
+
+
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #61b7c5;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.container {
+    text-align: center;
+    margin-top: 100px;
+    background-color: transparent;
+    color: gold;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+main {
+    min-height: calc(100% - 80px);
+}
+
+header {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    background: linear-gradient(to bottom right, rgba(97, 183, 197, 0.8), rgba(62, 61, 82, 0.8));}
+
+
+.cool-button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #61B7C5;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+.cool-button:hover {
+    background-color: #3E3D52;
+}
+
+
