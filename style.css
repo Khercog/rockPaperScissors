@@ -1,5 +1,6 @@
 html, body {
-    height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -7,55 +8,175 @@ body {
     background-size:  cover ;
     background-repeat: no-repeat;
     background-position: center;
-
-
-}
-
-.cta-button {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: #61b7c5;
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 18px;
-    border-radius: 5px;
-}
-
-.container {
-    text-align: center;
-    margin-top: 100px;
-    background-color: transparent;
-    color: gold;
-    padding: 40px;
-    border-radius: 10px;
-}
-
-main {
-    min-height: calc(100% - 80px);
 }
 
 header {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     text-transform: uppercase;
-    background: linear-gradient(to bottom right, rgba(97, 183, 197, 0.8), rgba(62, 61, 82, 0.8));}
+    background-image: url("https://media.freestocktextures.com/cache/21/08/21089fc1728d02b54392f4b4f4b117f7.jpg");
+    border-radius: 50px;
+
+
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+#header.container {
+    transition: opacity 0.9s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#header.container.hidden {
+    opacity: 0;
+    animation: upAnimation 3s;
+}
+
+/*div.flex-grow-1 {*/
+/*    transition: opacity 0.9s ease;*/
+/*    opacity: 1;*/
+/*    transform: translateY(0);*/
+/*}*/
+
+
+/*div.flex-grow-1.hidden {*/
+/*    opacity: 0;*/
+/*    animation: upAnimation 3s;*/
+/*}*/
+
+.board {
+    position: fixed;
+    top: 41.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    height: 50vh;
+    background-image: url("https://media.freestocktextures.com/cache/21/08/21089fc1728d02b54392f4b4f4b117f7.jpg");
+    background-size:  cover ;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    border-radius: 50px;
+    animation:  squareAnimation 1s ease-in-out forwards;
+    transform-origin: center;
+    transition: opacity 0.5s ease;
+}
 
 
 .cool-button {
     display: inline-block;
-    padding: 12px 24px;
+    padding: 10px 20px;
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
     color: #fff;
-    background-color: #61B7C5;
+    background-image: url(https://media.freestocktextures.com/cache/21/08/21089fc1728d02b54392f4b4f4b117f7.jpg);
+    background-size: cover;
     border: none;
-    border-radius: 30px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    animation: jumpAnimation 2s  infinite;
+    animation-delay: 4s;
+
 }
 
 .cool-button:hover {
-    background-color: #3E3D52;
+    opacity: 0.9;
+    animation-play-state: paused;
+}
+
+.cool-button.hidden {
+    opacity: 0;
+}
+
+.click-animation {
+    animation: clickAnimation 0.5s ease-in-out;
+}
+
+.changeWidth {
+    animation: widthAnimation 2s linear forwards;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 
+
+@keyframes upAnimation {
+    0% {
+        transform: translateY(0);
+    }
+    20% {
+        transform: translateY(-20px);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
+    100%{
+        transform: translateY(-40px);
+    }
+}
+
+@keyframes jumpAnimation {
+    0% {
+        transform: translateY(0);
+    }
+    20% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes squareAnimation {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(0.1);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) scaleX(2) scaleY(2);
+    }
+}
+
+@keyframes widthAnimation {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes heightAnimation {
+    from {
+        height: 0;
+    }
+    to {
+        height: 10rem;
+    }
+}
+
+@keyframes clickAnimation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+/* Mobile */
+
+@media (max-width: 767px) {
+    body {
+        background-position: -9rem ;
+    }
+}

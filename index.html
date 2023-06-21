@@ -11,22 +11,19 @@
     <script src="script.js" defer></script>
     <title>Rock Paper and Scissors</title>
 </head>
-<body>
-<div class="container">
-    <header class="text-white">
-        <h1 class="display-4 mt-5">Welcome to the RPS Game!</h1>
-        <p class="lead">Get ready for an amazing adventure</p>
+<body class="d-flex flex-column min-vh-100 ">
+<div class="flex-grow-1">
+    <header id="header" class="text-white py-1 container text-center mt-5 ">
+        <h1 id="title" class="display-4 mt-5">punch, slap or two finger poke</h1>
+        <p id="title-text" class="lead mb-0 pb-4 fw-bold">Get ready for an amazing adventure</p>
     </header>
-    <main>
-        <div class="container text-center">
-
-
-            <button class="cool-button" onclick="Game()">Begin</button>
-        </div>
+    <main class="container text-center text-center mt-5 pt-5 ">
+        <button class="cool-button mt-5" onclick="Game()">Begin</button>
     </main>
-    <footer class="text-white">
-        Created by &#128009
-    </footer>
 </div>
+
+    <footer class="text-white bg-dark py-1 mt-5 text-center">
+        ¡Created by Kevin!
+    </footer>
 </body>
 </html>

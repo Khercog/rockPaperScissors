@@ -65,5 +65,35 @@ function Game()
     }
 }
 
+const btn = document.querySelector(".cool-button");
+const div = document.querySelector("header.container");
+const divElement = document.createElement('div');
+
+
+btn.addEventListener("click", () => {
+    // Agregar clase para activar la animación
+    btn.classList.add('click-animation');
+
+    // Quitar la clase después de un tiempo para reiniciar la animación
+    setTimeout(function() {
+        btn.classList.remove('click-animation');
+    }, 500);
+    setTimeout(function() {
+        div.classList.add("hidden");
+        btn.setAttribute('style', 'background-image: url(https://media.freestocktextures.com/cache/21/08/21089fc1728d02b54392f4b4f4b117f7.jpg)');
+        divElement.innerHTML = btn.innerHTML; // Copia el contenido del botón
+        divElement.className = btn.className; // Copia las clases del botón
+        divElement.setAttribute('id', btn.getAttribute('id'));
+        btn.replaceWith(divElement);
+        divElement.classList.remove("cool-button");
+        divElement.textContent = '';
+        divElement.classList.add("board");
+    }, 500);
+
+
+
+});
+
+
 
 
