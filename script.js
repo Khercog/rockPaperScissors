@@ -81,11 +81,14 @@ var framesKnight1 = [];
 var framesKnight2 = [];
 var framesKnight3 = [];
 var animationInterval;
+let msg = 'images loaded';
+let welcomeScreen = true;
+let keysBlocked = true;
 
 
 // Array specifying the animation sequence
-// var sequence = ["ATTACK", "DIE", "HURT", "IDLE", "JUMP", "RUN", "WALK"];
-var sequence = ["IDLE"];
+var sequence = ["IDLE", "RUN", "ATTACK", "JUMP", "DIE", "HURT", "WALK"];
+// var sequence = ["IDLE"];
 
 // Duration in milliseconds for each frame
 var frameDuration = 80; // Adjust this value to control the animation speed
@@ -96,6 +99,7 @@ function loadImages(callback) {
     framesKnight1 = [];
     framesKnight2 = [];
     framesKnight3 = [];
+    keysBlocked = true;
 
     // Array of folder names
     var knightsArray = ["1_KNIGHT", "2_KNIGHT", "3_KNIGHT"];
@@ -126,22 +130,32 @@ function loadImages(callback) {
                     framesKnight3.push(image);
                 }
 
+
                 image.onload = () => {
                     imageCount++;
                     if (imageCount === framesKnight1.length) {
                         callback();
+                        keysBlocked = false;
                     }
                 };
             }
         });
     });
+    if (framesKnight1 != null)
+    {
+        console.log(msg);
+    }
+    keyInUse = false;
+    console.log('key is ready!');
+
 }
 
 // Start the animation
-function startAnimation(knight) {
+function startAnimation(knight = '0') {
     var currentFrame1 = 0;
     var currentFrame2 = 0;
     var currentFrame3 = 0;
+    var attackFrame1 = 10;
     var k1xPos = -100;
     var k1yPos = 0;
     var k2xPos = -60;
@@ -151,19 +165,18 @@ function startAnimation(knight) {
 
     console.log('Knight: ' + knight);
 
-
-
     animationInterval = setInterval(() => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // Caballero 1
 
-            if (sequence.includes("RUN") && sequence.includes("ATTACK") && knight === '2') {
+            if (knight === '2') {
 
+                // Movimiento
                 let entro1 = 'Entro igual al K1';
                 console.log(entro1);
-                ctx.drawImage(framesKnight1[currentFrame1], k2xPos, k2yPos, 300, 200);
-                currentFrame1++;
+                ctx.drawImage(framesKnight1[attackFrame1], k2xPos, k2yPos, 300, 200);
+                attackFrame1++;
                 if (k2xPos <= 50) {
                     k2xPos += 10;
                 } else {
@@ -171,18 +184,16 @@ function startAnimation(knight) {
                 }
 
                     console.log(sequence  + "  S")
-                    if (currentFrame1 === framesKnight1.length) {
-                        currentFrame1 = 0;
+                    if (attackFrame1 === 30) {
+                        attackFrame1 = 10;
                         clearInterval(animationInterval); // Limpiar cualquier intervalo de animación existente
                         setTimeout(() => {
-                        sequence = ['IDLE'];
                             let idleInterval = setInterval(() => {
-                                ctx.drawImage(framesKnight2[0], -100, 0, 300, 200);
+                                //ctx.drawImage(framesKnight1[0], -60, 150, 300, 200);
                             }, frameDuration);
                             setTimeout(() => {
                                 clearInterval(idleInterval); // Detener la animación de "IDLE" después de 5 segundos
                                 loadImages(() => {
-                                    sequence = ['IDLE'];
                                     startAnimation(); // Reiniciar la animación principal
                                 });
                             }, 100);
@@ -194,7 +205,7 @@ function startAnimation(knight) {
                 console.log(sequence);
                 ctx.drawImage(framesKnight1[currentFrame1], -60, 150, 300, 200);
                 currentFrame1++;
-                if (currentFrame1 === framesKnight1.length) {
+                if (currentFrame1 === 9) {
                     console.log("entro aca else de S");
                     currentFrame1 = 0;
                 }
@@ -204,12 +215,12 @@ function startAnimation(knight) {
 
 
         // Caballero 2
-        if (sequence.includes("RUN") && sequence.includes("ATTACK") && knight === '1')
+        if (knight === '1')
         {
             let entro2 = 'Entro igual al K2';
             console.log(entro2);
-            ctx.drawImage(framesKnight2[currentFrame2], k1xPos, k1yPos, 300, 200);
-            currentFrame2++;
+            ctx.drawImage(framesKnight2[attackFrame1], k1xPos, k1yPos, 300, 200);
+            attackFrame1++;
             if (k1xPos <= 50) {
                 k1xPos += 10;
                 k1yPos += 10;
@@ -219,23 +230,16 @@ function startAnimation(knight) {
             }
 
             console.log(sequence  + "  A")
-            if (currentFrame2 === framesKnight2.length) {
-                currentFrame2 = 0;
-                console.log("ACAAAAAAAAA");
+            if (attackFrame1 === 30) {
+                attackFrame1 = 0;
                 clearInterval(animationInterval); // Limpiar cualquier intervalo de animación existente
                 setTimeout(() => {
-                    sequence = ['IDLE']; // Limpiar la secuencia actual
-                    console.log("x: " + k1xPos);
-                    console.log("y: " + k1yPos);
                     let idleInterval = setInterval(() => {
-                        ctx.drawImage(framesKnight2[0], -100, 0, 300, 200);
+                        //ctx.drawImage(framesKnight2[0], -100, 0, 300, 200);
                 }, frameDuration);
                     setTimeout(() => {
                         clearInterval(idleInterval); // Detener la animación de "IDLE" después de 5 segundos
                         loadImages(() => {
-                            console.log("ACAAAAAAAAA");
-                            sequence = ['IDLE'];
-                            console.log(sequence);
                             startAnimation(); // Reiniciar la animación principal
                         });
                     }, 100);
@@ -246,7 +250,7 @@ function startAnimation(knight) {
         {
             ctx.drawImage(framesKnight2[currentFrame2], -100, 0, 300, 200);
             currentFrame2++;
-            if (currentFrame2 === framesKnight2.length) {
+            if (currentFrame2 === 9) {
                 currentFrame2 = 0;
                 console.log("entro aca else de A");
             }
@@ -255,13 +259,13 @@ function startAnimation(knight) {
 
         // Caballero 3
 
-        if (sequence.includes("RUN") && sequence.includes("ATTACK") && knight === '3') {
+        if (knight === '3') {
 
             let entro3 = 'Entro igual al K3';
             console.log(entro3);
 
-            ctx.drawImage(framesKnight3[currentFrame3], k3xPos, k3yPos, 300, 200);
-            currentFrame3++;
+            ctx.drawImage(framesKnight3[attackFrame1], k3xPos, k3yPos, 300, 200);
+            attackFrame1++;
             if (k3xPos <= 50) {
                 k3xPos += 10;
                 k3yPos -= 10;
@@ -271,18 +275,16 @@ function startAnimation(knight) {
             }
 
             console.log(sequence + "  D")
-            if (currentFrame3 === framesKnight3.length) {
-                currentFrame3 = 0;
+            if (attackFrame1 === 30) {
+                attackFrame1 = 10;
                 clearInterval(animationInterval); // Limpiar cualquier intervalo de animación existente
                 setTimeout(() => {
-                    sequence = ['IDLE']; // Limpiar la secuencia actual
                     let idleInterval = setInterval(() => {
-                        ctx.drawImage(framesKnight2[0], -100, 0, 300, 200);
+                        //ctx.drawImage(framesKnight3[0], -100, 300, 300, 200);
                     }, frameDuration);
                     setTimeout(() => {
                         clearInterval(idleInterval); // Detener la animación de "IDLE" después de 5 segundos
                         loadImages(() => {
-                            sequence = ['IDLE'];
                             startAnimation(); // Reiniciar la animación principal
                         });
                     }, 100);
@@ -292,7 +294,7 @@ function startAnimation(knight) {
         } else {
             ctx.drawImage(framesKnight3[currentFrame3], -100, 300, 300, 200);
             currentFrame3++;
-            if (currentFrame3 === framesKnight3.length) {
+            if (currentFrame3 === 9) {
                 currentFrame3 = 0;
                 console.log("entro aca else de D");
             }
@@ -316,36 +318,48 @@ btn.addEventListener("click", () => {
         divElement.classList.add("board");
         divElement.appendChild(canvas);
         canvas.classList.add('canvas');
+        welcomeScreen = false;
 
     // loadImages( () => startAnimation());
     loadImages(() => {
-        sequence = ["IDLE"]; // Establecer la secuencia en "IDLE" por defecto
         startAnimation();
     });
 });
 
-document.addEventListener("keydown", function(event) {
+    document.addEventListener("keydown", function(event) {
+        if (keysBlocked) {
+            alert('Keys blocked...')
+            return;
+        }
+        // Verificar si las teclas están bloqueadas
+        if (welcomeScreen === false) {
+                if (event.key === "a") {
+                    // Bloquear las teclas
+                    clearInterval(animationInterval); // Limpiar cualquier intervalo de animación existente
+                    loadImages(() => {
+                        startAnimation('1');
+                    });
+                } else if (event.key === "s") {
 
-    if (event.key === "a") {
-        sequence = ["RUN", "ATTACK"];
-        clearInterval(animationInterval); // Limpiar cualquier intervalo de animación existente
-        loadImages(() => {
-            startAnimation('1');
-        });
-    } else if (event.key === "s") {
-        sequence = ["RUN", "ATTACK"];
-        clearInterval(animationInterval); // Limpiar cualquier intervalo de animación existente
-        loadImages(() => {
-            startAnimation('2');
-        });
-    } else if (event.key === "d") {
-        sequence = ["RUN", "ATTACK"];
-        clearInterval(animationInterval); // Limpiar cualquier intervalo de animación existente
-        loadImages(() => {
-            startAnimation('3');
-        });
-    }
-});
+                    clearInterval(animationInterval); // Limpiar cualquier intervalo de animación existente
+                    loadImages(() => {
+                        startAnimation('2');
+                    });
+                } else if (event.key === "d") {
+                    // Bloquear las teclas
+
+                    clearInterval(animationInterval); // Limpiar cualquier intervalo de animación existente
+                    loadImages(() => {
+                        startAnimation('3');
+                    });
+                }
+        }  else {
+            console.log('Click on the button to join the fight!');
+        }
+
+    });
+
+
 
 
 
