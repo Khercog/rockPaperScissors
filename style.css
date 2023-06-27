@@ -94,14 +94,24 @@ header {
     opacity: 0;
 }
 
-.click-animation {
-    animation: clickAnimation 0.5s ease-in-out;
-}
+/*.click-animation {*/
+/*    animation: clickAnimation 0.3s ease-in-out;*/
+/*}*/
 
 .changeWidth {
     animation: widthAnimation 2s linear forwards;
     overflow: hidden;
     white-space: nowrap;
+}
+
+.canvas {
+    border: 5px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50rem;
+    height: 25rem;
 }
 
 
